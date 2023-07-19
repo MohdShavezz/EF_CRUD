@@ -1,0 +1,85 @@
+@model IEnumerable<codefirst.Models.Student>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+@*@Html.Raw(TempData["InsertMsg"])*@
+@*<p style="color:forestgreen;"> @TempData["InsertMsg"]</p>*@
+<div>
+    @if (TempData["InsertMsg"] != null)
+    {
+        <div class="message">
+            @TempData["InsertMsg"]
+        </div>
+    }
+</div>
+@*<p style="color:forestgreen;"> @TempData["EditMsg"]</p>*@
+<div>
+    @if (TempData["EditMsg"] != null)
+    {
+        <div class="message">
+            @TempData["EditMsg"]
+        </div>
+    }
+</div>
+@*<p style="color:forestgreen;"> @TempData["DeleteMsg"]</p>*@
+<div>
+    @if (TempData["DeleteMsg"] != null)
+    {
+        <div class="message">
+            @TempData["DeleteMsg"]
+        </div>
+    }
+</div>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Age)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Course)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Age)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Course)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>
+
+<!-- JavaScript/jQuery to hide the message after 3 seconds -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+        $(document).ready(function () {
+            function hideMessage() {
+                $('.message').fadeOut(100); // Fade out in (100 milliseconds)
+            }
+            setTimeout(hideMessage, 2000);
+        });
+</script>
